@@ -14,6 +14,8 @@ type FileSegmentProps = BaseFileItemProps & {
   directoryCode?: string // Added for consistency with Folder type
 }
 
+
+
 const FileSegment = (props: FileSegmentProps) => {
   const { id, fileType, size, name, documentNumber, directoryCode, category, onClick, loading, ...rest } = props
 
