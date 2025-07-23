@@ -66,7 +66,7 @@ export type DropdownItemCallbackProps = {
   onRename?: () => void
   onDelete?: () => void
   onpreview?: () => void
-  onDetails?: () => void
+  onDetails?: (id: string) => void
   onEdit?: () => void
 }
 
@@ -76,17 +76,12 @@ export type Files = Array<File | Folder>
 
 export type Directories = { id: string; label: string }[]
 
-export type GetFoldersListResponse = {
-  length: number
-  data: File[]
-  directory: Directories
-}
-
-export type GetFilesListResponse = {
-  length: number
-  forEach(arg0: (item: any) => void): unknown
+// New generic type for paginated API responses
+export type PaginatedApiResponse<T> = {
+  message: string
+  status: number
   data: {
-    content: File[]
+    content: T[]
     page: {
       number: number
       size: number
@@ -94,8 +89,12 @@ export type GetFilesListResponse = {
       totalPages: number
     }
   }
-  directory: Directories
+  directory?: Directories // Optional, if it sometimes comes back at the top level
 }
+
+// Updated types to use PaginatedApiResponse
+export type GetFoldersListResponse = PaginatedApiResponse<File | Folder> // Can contain both files and folders
+export type GetFilesListResponse = PaginatedApiResponse<File> // Typically contains only files
 
 export interface FilePreviewResponse {
   srcUrl: string
@@ -117,20 +116,22 @@ export type BaseFileItemProps = {
 // LOG HELPERS
 // ----------------------------
 
+// Updated log functions to match new response types
 export const logFoldersResponse = (res: GetFoldersListResponse) => {
   console.group("[📁 Folders List Response]")
-  console.log("📦 Total Files:", res.length)
-  console.log("📄 Data:", res.data)
-  console.log("🗂️ Directories:", res.directory)
+  console.log("📦 Total Files:", res.data.page.totalElements)
+  console.log("📄 Data Content:", res.data.content)
+  console.log("📄 Pagination:", res.data.page)
+  if (res.directory) console.log("🗂️ Directories:", res.directory)
   console.groupEnd()
 }
 
 export const logFilesResponse = (res: GetFilesListResponse) => {
   console.group("[📁 Files List Response]")
-  console.log("📦 Total Items:", res.length)
+  console.log("📦 Total Items:", res.data.page.totalElements)
   console.log("📄 Content:", res.data.content)
   console.log("📄 Pagination:", res.data.page)
-  console.log("🗂️ Directories:", res.directory)
+  if (res.directory) console.log("🗂️ Directories:", res.directory)
   console.groupEnd()
 }
 

@@ -17,6 +17,14 @@ type FileSegmentProps = BaseFileItemProps & {
 const FileSegment = (props: FileSegmentProps) => {
   const { id, fileType, size, name, documentNumber, directoryCode, category, onClick, loading, ...rest } = props
 
+  // Helper to render the code/document number, ensuring layout stability for empty strings
+  const renderCode = (code: string | undefined) => {
+    if (code === undefined || code === null) {
+      return "N/A"
+    }
+    return code === "" ? "\u00A0" : code // Render non-breaking space for empty string
+  }
+
   return (
     <div
       className="bg-white rounded-2xl dark:bg-gray-800 border border-gray-200 dark:border-transparent py-4 px-3.5 flex items-center justify-between gap-2 transition-all hover:shadow-[0_0_1rem_0.25rem_rgba(0,0,0,0.04),0px_2rem_1.5rem_-1rem_rgba(0,0,0,0.12)] cursor-pointer"
@@ -40,11 +48,11 @@ const FileSegment = (props: FileSegmentProps) => {
 
             <div className="flex flex-col">
               {/* Display documentNumber for files, directoryCode for folders */}
-              {fileType !== "directory" && documentNumber && (
-                <div className="font-bold heading-text group-hover:text-primary">{documentNumber}</div>
+              {fileType !== "directory" && documentNumber !== undefined && documentNumber !== null && (
+                <div className="font-bold heading-text group-hover:text-primary">{renderCode(documentNumber)}</div>
               )}
-              {fileType === "directory" && directoryCode && (
-                <div className="font-bold heading-text group-hover:text-primary">{directoryCode}</div>
+              {fileType === "directory" && directoryCode !== undefined && directoryCode !== null && (
+                <div className="font-bold heading-text group-hover:text-primary">{renderCode(directoryCode)}</div>
               )}
               <div className="font-bold heading-text">{name}</div>
               {fileType !== "directory" && <div className="text-xs opacity-60">{category}</div>}
@@ -62,4 +70,3 @@ const FileSegment = (props: FileSegmentProps) => {
 }
 
 export default FileSegment
-

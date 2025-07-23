@@ -1,8 +1,7 @@
-
 import ApiService from "./ApiService"
+import type { GetFoldersListResponse, GetFilesListResponse } from "../views/concepts/files/FolderManager/types" // Ensure types are imported
 
 //<+++++++++++++++++++++++++++++++++Api Get Files for taemp ++++++++++++++++++++++++++++++++++++++++>
-
 export async function apiGetFiles<T, U extends Record<string, unknown>>(params: U) {
   return ApiService.fetchDataWithAxios<T>({
     url: "/api/files",
@@ -12,39 +11,41 @@ export async function apiGetFiles<T, U extends Record<string, unknown>>(params: 
 }
 
 //<+++++++++++++++++++++++++++++++++Api Gets Folder ++++++++++++++++++++++++++++++++++++++++>
-export async function apiGetFolders<T, U extends Record<string, unknown>>(params: U) {
-  // Apply default pagination values
+export async function apiGetFolders<U extends Record<string, unknown> & { page?: number; size?: number }>(
+  params: U,
+): Promise<GetFoldersListResponse> {
+  // Apply default pagination values, but allow them to be overridden by params
   const baseParams = {
-    page: 0,
-    size: 10,
-    ...params,
-  };
+    page: params.page ?? 0, // Use params.page if provided, otherwise default to 0
+    size: params.size ?? 10, // Use params.size if provided, otherwise default to 10
+    ...params, // Spread other parameters
+  }
 
   // Handle array parameters manually for proper serialization
   if (baseParams.ids && Array.isArray(baseParams.ids)) {
-    const queryParams = baseParams.ids.map((id) => `ids=${id}`).join("&");
-    const url = `/project-files?${queryParams}`;
+    const queryParams = baseParams.ids.map((id) => `ids=${id}`).join("&")
+    const url = `/project-files?${queryParams}`
 
     // Remove ids from params to avoid double serialization
-    const { ids, ...otherParams } = baseParams;
+    const { ids, ...otherParams } = baseParams
 
-    return ApiService.backendApiWithAxios<T>({
+    return ApiService.backendApiWithAxios<GetFoldersListResponse>({
       url,
       method: "get",
       params: otherParams, // Includes pagination and other params
-    });
+    })
   }
 
-  return ApiService.backendApiWithAxios<T>({
+  return ApiService.backendApiWithAxios<GetFoldersListResponse>({
     url: "/project-files",
     method: "get",
     params: baseParams, // Includes pagination params
-  });
+  })
 }
-//<+++++++++++++++++++++++++++++++++Api Gets Files ++++++++++++++++++++++++++++++++++++++++>
 
-export async function apiGetdoc<T, U extends Record<string, unknown>>(params: U) {
-  return ApiService.backendApiWithAxios<T>({
+//<+++++++++++++++++++++++++++++++++Api Gets Files ++++++++++++++++++++++++++++++++++++++++>
+export async function apiGetdoc<U extends Record<string, unknown>>(params: U): Promise<GetFilesListResponse> {
+  return ApiService.backendApiWithAxios<GetFilesListResponse>({
     url: `/documents?`,
     method: "get",
     params: {
@@ -55,7 +56,6 @@ export async function apiGetdoc<T, U extends Record<string, unknown>>(params: U)
 }
 
 //<+++++++++++++++++++++++++++++++++Api Docments perview ++++++++++++++++++++++++++++++++++++++++>
-
 export async function apiDocPreview<T, U extends Record<string, unknown>>(params: U) {
   return ApiService.backendApiWithAxios<T>({
     url: `/documents/download/${params.id}`,
@@ -66,7 +66,6 @@ export async function apiDocPreview<T, U extends Record<string, unknown>>(params
 }
 
 //<+++++++++++++++++++++++++++++++++Api Create Folder ++++++++++++++++++++++++++++++++++++++++>
-
 export async function apiCreateFolders<T, U extends Record<string, unknown>>(payload: U) {
   console.log("Payload to be sent to create folder : ", payload)
 
@@ -78,7 +77,6 @@ export async function apiCreateFolders<T, U extends Record<string, unknown>>(pay
 }
 
 //<+++++++++++++++++++++++++++++++++Api Update Category and other ++++++++++++++++++++++++++++++++++++++++>
-
 export async function apiUpdateFolder<T, U extends Record<string, unknown>>(id: string, payload: U) {
   console.log("Sending:", { id, payload })
   return ApiService.backendApiWithAxios<T>({
@@ -89,7 +87,6 @@ export async function apiUpdateFolder<T, U extends Record<string, unknown>>(id: 
 }
 
 //<+++++++++++++++++++++++++++++++++Api Delete Folder ++++++++++++++++++++++++++++++++++++++++>
-
 export async function apiDeleteFolder<T>(folderId: string) {
   return ApiService.backendApiWithAxios<T>({
     url: `/project-files?id=${folderId}`, // API endpoint for deleting a folder
@@ -98,7 +95,6 @@ export async function apiDeleteFolder<T>(folderId: string) {
 }
 
 //<+++++++++++++++++++++++++++++++++Api Delete Files ++++++++++++++++++++++++++++++++++++++++>
-
 export async function apiDeleteFile<T>(fileId: string) {
   console.log("Deleting file with ID:", fileId) // Log the file ID being deleted
   return ApiService.backendApiWithAxios<T>({
@@ -120,7 +116,6 @@ export async function apiUploadFile<T, U extends Record<string, unknown>>(file: 
 }
 
 //<+++++++++++++++++++++++++++++++++Api Rename Files ++++++++++++++++++++++++++++++++++++++++>
-
 export async function apiRenameFile({
   id,
   newName,
@@ -135,3 +130,4 @@ export async function apiRenameFile({
     method: "put",
   })
 }
+
