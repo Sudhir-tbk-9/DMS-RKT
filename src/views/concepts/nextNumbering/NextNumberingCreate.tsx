@@ -179,7 +179,7 @@ const NextNumberingCreate = () => {
     console.log("🚀 Form submitted!")
     console.log("📝 Form data:", formData)
 
-    if (!formData.category || !formData.process || !formData.docId || !formData.folder) {
+    if (!formData.process || !!formData.folder) {
       console.log("❌ Validation failed - missing required fields")
       toast.push(
         <Notification title="Validation Error" type="danger">
@@ -243,7 +243,7 @@ const NextNumberingCreate = () => {
               />
             </FormItem>
 
-            <FormItem label="Category *" invalid={!formData.category} errorMessage="Category is required">
+            {/* <FormItem label="Category *" invalid={!formData.category} errorMessage="Category is required">
               <Select
                 placeholder="Select Category"
                 options={categories}
@@ -252,7 +252,7 @@ const NextNumberingCreate = () => {
                 isDisabled={!selectedFolder}
                 noOptionsMessage={() => "No categories available"}
               />
-            </FormItem>
+            </FormItem> */}
 
             <FormItem label="Process *" invalid={!formData.process} errorMessage="Process is required">
               <Input
@@ -262,13 +262,13 @@ const NextNumberingCreate = () => {
               />
             </FormItem>
 
-            <FormItem label="Document ID *" invalid={!formData.docId} errorMessage="Document ID is required">
+            {/* <FormItem label="Document ID *" invalid={!formData.docId} errorMessage="Document ID is required">
               <Input
                 value={formData.docId}
                 onChange={(e) => handleInputChange("docId", e.target.value)}
                 placeholder="e.g., 00-01"
               />
-            </FormItem>
+            </FormItem> */}
 
             <FormItem label="Year">
               <Input type="number" value={formData.year} disabled className="bg-gray-100" />
@@ -278,9 +278,9 @@ const NextNumberingCreate = () => {
               <Input type="number" value={formData.length} disabled className="bg-gray-100" />
             </FormItem>
 
-            <FormItem label="Starting Index">
+            {/* <FormItem label="Starting Index">
               <Input type="number" disabled value={formData.currentIndex} className="bg-gray-100" />
-            </FormItem>
+            </FormItem> */}
 
             <FormItem label="Status">
               <div className="flex items-center gap-2">
