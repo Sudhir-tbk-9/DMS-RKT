@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 export const apiPrefix = '/api'
 
 const endpointConfig = {

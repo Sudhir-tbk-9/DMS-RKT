@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 import { lazy } from 'react'
 import type { Routes } from '@/@types/routes'
 

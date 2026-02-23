@@ -48,6 +48,7 @@ const nextNumberingRoute: Routes = [
       footer: false,
     },
   },
+  
 ]
 
 export default nextNumberingRoute

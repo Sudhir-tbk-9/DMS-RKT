@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 import type { ReactNode, CSSProperties } from 'react'
 
 export interface CommonProps {

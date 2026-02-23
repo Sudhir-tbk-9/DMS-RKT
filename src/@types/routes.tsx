@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 import { LayoutType } from './theme'
 import type { LazyExoticComponent, ReactNode } from 'react'
 

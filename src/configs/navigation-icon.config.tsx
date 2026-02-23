@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 import {
   PiPuzzlePieceDuotone,
   PiSwatchesDuotone,
@@ -135,6 +139,7 @@ const navigationIcon: NavigationIcons = {
   customerList: <PiUserListDuotone />,
   customerEdit: <PiPencilSimpleLineDuotone />,
   customerCreate: <PiUserPlusDuotone />,
+  logs: <PiFileTextDuotone />,
   customerDetails: <PiUserCircleDuotone />,
   products: <PiPackageDuotone />,
   productList: <PiListStarDuotone />,

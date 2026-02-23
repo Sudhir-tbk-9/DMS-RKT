@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 import { COLORS } from '@/constants/chart.constant'
 import type { ApexOptions } from 'apexcharts'
 

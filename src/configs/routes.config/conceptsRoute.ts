@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 import { lazy } from "react"
 import { CONCEPTS_PREFIX_PATH } from "@/constants/route.constant"
 import { ADMIN, USER } from "@/constants/roles.constant"
@@ -120,6 +124,20 @@ const conceptsRoute: Routes = [
         contained: true,
       },
       footer: false,
+    },
+  },
+  {
+    key: "concepts.auditLogs.list",
+    path: `${CONCEPTS_PREFIX_PATH}/logs`,
+    component: lazy(() => import("@/views/concepts/auditLogs/AuditLogsList/AuditLogsList")),
+    authority: [ADMIN],
+    meta: {
+      header: {
+        
+        description: "Track and manage system audit logs.",
+        contained: true,
+      },
+     footer: false,
     },
   },
 ]

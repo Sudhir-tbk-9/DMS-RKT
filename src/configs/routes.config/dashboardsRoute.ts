@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 import { lazy } from 'react'
 import { DASHBOARDS_PREFIX_PATH } from '@/constants/route.constant'
 import { ADMIN, USER } from '@/constants/roles.constant'

@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 import ApiService from "./ApiService"
 import type { GetFoldersListResponse, GetFilesListResponse } from "../views/concepts/files/FolderManager/types" // Ensure types are imported
 

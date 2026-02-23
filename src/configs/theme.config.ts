@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 import { THEME_ENUM } from '@/constants/theme.constant'
 import {  Mode, ControlSize, LayoutType } from '@/@types/theme'
 

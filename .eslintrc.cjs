@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2025 
+ *   All rights reserved.
+ */
 /* eslint-disable no-undef */
 module.exports = {
   extends: [
