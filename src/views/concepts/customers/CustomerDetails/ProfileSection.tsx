@@ -84,16 +84,6 @@ const ProfileSection = ({ data = {} }: ProfileSectionProps) => {
 
     return (
         <Card className="w-full p-3">
-            {/* <div className="flex justify-end mb-1">
-                <Tooltip title="Edit customer">
-                    <button
-                        className="text-sm p-1"
-                        onClick={() => navigate(`/concepts/customers/customer-edit/${id}`)}
-                    >
-                        <HiPencil />
-                    </button>
-                </Tooltip>
-            </div> */}
 
             <div className="flex flex-col min-h-[420px]">
                 <div className="flex flex-col items-center mb-2">

@@ -32,7 +32,8 @@ const validationSchema: ZodType<CustomerFormSchema> = z
     status: z.enum(["ACTIVE", "INACTIVE"]),
     image: z.string().optional(),
     roles: z.array(z.string()).min(1, { message: "At least one role is required" }),
-    password: z.string().min(8, { message: "Password must be at least 8 characters" }),
+    // password: z.string().min(8, { message: "Password must be at least 8 characters" }),
+    password: z.string().optional(),
     projectFileIds: z.array(z.number()),
   })
   .refine(

@@ -23,6 +23,16 @@ export async function apiGetCustomer<T, U extends Record<string, unknown>>({
         })
     }
 
+export async function apiDeleteCustomer<T, U extends Record<string, unknown>>({
+    id,
+    }: U) {
+        return ApiService.backendApiWithAxios<T>({
+            url: `/user/delete/${id}`,
+            method: 'delete',
+           
+        })
+    }
+
 
 export async function apiGetCustomerLog<T, U extends Record<string, unknown>>({
     ...params
@@ -44,8 +54,6 @@ export async function apiCreateUser<T>(data: CreateUserPayload): Promise<T> {
     data,
   });
 }
-
-
 
 
 export async function apiGetUserList<T, U extends Record<string, unknown>>(
